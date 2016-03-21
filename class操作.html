@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<script>
+	document.addEventListener('DOMContentLoaded',function(){
+		var oBtn=document.querySelector('input');
+		var oDiv=document.querySelector('div');
+		
+		//oDiv.classList.add('on2');
+		//oDiv.classList.remove('on');
+		//alert(oDiv.classList.contains('on'));
+		
+		oBtn.onclick=function(){
+			oDiv.classList.toggle('on');
+		};
+	},false);
+</script>
+</head>
+
+<body>
+<input type="button" value="按钮">
+<div class="box on red"></div>
+</body>
+</html>

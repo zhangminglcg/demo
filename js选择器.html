@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<script>
+	document.addEventListener('DOMContentLoaded',function(){
+		var aLi=document.querySelectorAll('#box ul li');
+		//alert(aLi.length);
+		var oLi=document.querySelector('#box ul li.on');
+		oLi.style.background='red';
+	},false);
+</script>
+</head>
+
+<body>
+<div id="box">
+	<ul>
+    	<li class="on"></li>
+        <li class="on"></li>
+        <li class="active"></li>
+        <li class="on"></li>
+        <li class="box"></li>
+    </ul>
+</div>
+</body>
+</html>

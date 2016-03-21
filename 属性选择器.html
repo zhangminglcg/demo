@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style>
+	*{ margin:0; padding:0;}
+	li{ height:30px;}
+	/*li[title]{ background:red;}
+	li[title~=on]{ background:red;}
+	li[title*=on]{ background:red;}
+	li[title^=on]{ background:red;}
+	li[title$=on]{ background:red;}*/
+	li[title|=on]{ background:red;}
+</style>
+</head>
+
+<body>
+<ul>
+	<li>1</li>
+	<li title="box">2</li>
+	<li title="on">3</li>
+	<li title="box on3">4</li>
+	<li title="on active">5</li>
+	<li title="on-red">6</li>
+</ul>
+</body>
+</html>

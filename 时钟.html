@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style>
+	*{ margin:0; padding:0;}
+	#box{ width:300px; height:300px; border:5px solid #000; border-radius:50%; margin:100px auto; position:relative;}
+	#box  div{border-radius:100% 100% 0 0; position:absolute; left:50%;-webkit-transform-origin:center bottom;}
+	#box .hou{width:8px; height:80px; background:#000;  top:70px; margin-left:-4px;} 
+	#box .min{ width:6px; height:100px; background:#000; margin-left:-3px; top:50px;}
+	#box .sec{ width:4px; height:120px; background:red; margin-left:-2px; top:30px;}
+	#box .kd{ width:4px; height:10px; left:50%; margin-left:-2px; top:0; display:block; position:absolute; background:#000; -webkit-transform-origin:center 150px; }
+	#box .big_kd{width:6px; height:15px; left:50%; margin-left:-3px; top:0; display:block; position:absolute; background:#000; -webkit-transform-origin:center 150px; }
+	#box .big_kd em{ font-style:normal; position:absolute; top:15px; font-weight:bold; width:30px; left:50%; margin-left:-15px; text-align:center;}
+	#box .cap{ display:block; width:10px; height:10px; border-radius:50%; background:#000; position:absolute; left:50%; top:50%; margin-top:-5px; margin-left:-5px;}
+</style>
+<script>
+	document.addEventListener('DOMContentLoaded',function(){
+		var oDiv=document.querySelector('#box');
+		var oHou=document.querySelector('.hou');
+		var oMin=document.querySelector('.min');
+		var oSec=document.querySelector('.sec');
+		var N=60;
+		
+		for(var i=0;i<N;i++)
+		{
+			var oS=document.createElement('span');
+			if(i%5){
+				oS.className='kd';
+			}else{
+				oS.className='big_kd'
+				var oEm=document.createElement('em');
+				oEm.innerHTML=i/5||12;
+				oEm.style.WebkitTransform='rotate('+-i*6+'deg)'
+				oS.appendChild(oEm);
+			}
+			oS.style.WebkitTransform='rotate('+i*6+'deg)';
+			oDiv.appendChild(oS);
+		}
+		
+		clock();
+		setInterval(clock,1);
+		
+		function clock(){
+			//alert(1);
+			var oDate=new Date();
+			var H=oDate.getHours();
+			var M=oDate.getMinutes();
+			var S=oDate.getSeconds();
+			var mS=oDate.getMilliseconds();
+			
+			oHou.style.WebkitTransform='rotate('+(H*30+M/60*30)+'deg)';
+			oMin.style.WebkitTransform='rotate('+(M*6+S/60*6)+'deg)';
+			oSec.style.WebkitTransform='rotate('+(S*6+mS/1000*6)+'deg)';
+		}
+	},false);
+</script>
+</head>
+
+<body>
+<div id="box">
+	<div class="hou"></div>
+    <div class="min"></div>
+    <div class="sec"></div>
+    <span class="kd"></span>
+    <samp class="cap"></samp>
+</div>
+</body>
+</html>

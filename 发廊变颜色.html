@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style>
+	*{ margin:0; padding:0;}
+	@keyframes test{
+		from{top:0px;}
+		to{top:-57px;}
+	}
+	#div1{ width:300px; height:50px; margin:100px auto; position:relative; overflow:hidden; border-radius:25px;}
+	#div1 .bar{ width:300px; height:150px; position:absolute; left:0; top:0; background:-webkit-repeating-linear-gradient(-45deg,red 0px,red 10px,#fff 10px,#fff 20px,blue 20px,blue 30px,#fff 30px,#fff 40px); -webkit-animation-duration:.6s;-webkit-animation-timing-function:linear;-webkit-animation-name:test;-webkit-animation-iteration-count:infinite;}
+</style>
+<script>
+	document.addEventListener('DOMContentLoaded',function(){
+		var aInp=document.getElementsByTagName('input');
+		var aS=document.getElementsByTagName('span');
+		var oDiv=document.querySelector('.bar');
+		oDiv.style.background='-webkit-repeating-linear-gradient(-45deg,'+aS[0].innerHTML+' 0px,'+aS[0].innerHTML+' 10px,'+aS[1].innerHTML+' 10px,'+aS[1].innerHTML+' 20px)';
+		
+		for(var i=0;i<aInp.length;i++)
+		{
+			(function(index){
+				aInp[i].addEventListener('input',function(){
+					//alert(this.value);
+					aS[index].innerHTML=this.value;
+					oDiv.style.background='-webkit-repeating-linear-gradient(-45deg,'+aS[0].innerHTML+' 0px,'+aS[0].innerHTML+' 10px,'+aS[1].innerHTML+' 10px,'+aS[1].innerHTML+' 20px)';
+				},false);
+			})(i);
+		}
+	},false);
+</script>
+</head>
+
+<body>
+<label>颜色：</label>
+<input type="color" value="#ff0000">
+<input type="color" value="#0000a0">
+<span>#ff0000</span>
+<span>#0000a0</span>
+<div id="div1">
+	<div class="bar"></div>
+</div>
+</body>
+</html>

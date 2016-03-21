@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style>
+	*{ margin:0; padding:0;}
+	div{ width:200px; height:200px; background:#ccc; position:absolute; left:0; top:0;}
+</style>
+<script>
+	function setTransition(obj,name,value){
+		obj.style['Webkit'+name.charAt(0).toUpperCase()+name.substring(1)]=value;
+		obj.style['Moz'+name.charAt(0).toUpperCase()+name.substring(1)]=value;
+		obj.style['Ms'+name.charAt(0).toUpperCase()+name.substring(1)]=value;
+		obj.style['O'+name.charAt(0).toUpperCase()+name.substring(1)]=value;
+		obj.style.name=value;
+	}
+	document.addEventListener('DOMContentLoaded',function(){
+		var oDiv=document.querySelector('div');
+		
+		setTransition(oDiv,'transition','1s all ease');
+		
+		oDiv.onclick=function(){
+			oDiv.style.height='500px';
+			oDiv.style.width='500px';
+			oDiv.style.background='red';
+		};
+		
+	},false);
+</script>
+</head>
+
+<body>
+<div></div>
+</body>
+</html>

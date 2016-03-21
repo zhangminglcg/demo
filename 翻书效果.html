@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style>
+	*{ margin:0; padding:0;}
+	.box{ width:700px; height:400px; background:url(img/1.jpg) no-repeat; margin:100px auto; position:relative;}
+	.box .page1{ width:50%; position:absolute; right:0; top:0; height:400px;-webkit-transform-style:preserve-3d;z-index:3;-webkit-transform:perspective(800px) rotateY(0deg);-webkit-transform-origin:left;}
+	.box .page1 span{ position:absolute; width:100%; height:100%; -webkit-transform:perspective(800px); }
+	.box .page1 .front{ background:url(img/1.jpg) no-repeat right top; -webkit-transform:translateZ(1px);}
+	.box .page1 .back{ background:url(img/2.jpg) no-repeat; -webkit-transform:translateZ(-1px) scale(-1,1);}
+	.box .shadow{ width:50%; position:absolute; right:0; top:0; height:100%; -webkit-transition:1s all ease; background:#000; opacity:1;z-index:2;}
+	.box .page2{width:50%; position:absolute; right:0; top:0; height:100%; background:url(img/2.jpg) no-repeat right top; z-index:1;}
+</style>
+<script>
+	document.addEventListener('DOMContentLoaded',function(){
+		var oBox=document.querySelector('.box');
+		var oPage1=document.querySelector('.box .page1');
+		var oShadow=document.querySelector('.box .shadow');
+		var oF=oPage1.children[0];
+		var oB=oPage1.children[1];
+		var oPage2=document.querySelector('.box .page2');
+		var iNow=0;
+		var bOk=false;
+		oBox.addEventListener('click',function(){
+			if(bOk) return;
+			bOk=true;
+			iNow++;
+			oPage1.style.WebkitTransition='1s all ease';
+			oPage1.style.WebkitTransform='perspective(800px) rotateY(-180deg)';
+			oShadow.style.opacity=0;
+			
+			oPage1.addEventListener('transitionend',function(){
+				oPage1.style.WebkitTransition='null';
+				oPage1.style.WebkitTransform='perspective(800px) rotateY(0deg)';
+				oF.style.backgroundImage='url(img/'+(iNow%3+1)+'.jpg)';
+				oB.style.backgroundImage='url(img/'+((iNow+1)%3+1)+'.jpg)';
+				oBox.style.backgroundImage='url(img/'+(iNow%3+1)+'.jpg)';
+				oPage2.style.backgroundImage='url(img/'+((iNow+1)%3+1)+'.jpg)';
+				//alert(oPage2.style.backgroundImage);
+				oShadow.style.opacity=1;
+				bOk=false;
+			},false);
+		},false);
+	},false);
+</script>
+</head>
+
+<body>
+<div class="box">
+	<div class="page1">
+    	<span class="front"></span>
+        <span class="back"></span>
+    </div>
+    <div class="shadow"></div>
+    <div class="page2"></div>
+</div>
+</body>
+</html>

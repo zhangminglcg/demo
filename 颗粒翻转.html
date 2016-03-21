@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style>
+	*{ margin:0; padding:0;}
+	body,html{ overflow:hidden;}
+	.box{ width:700px; height:400px; margin:100px auto; position:relative;top:0; left:0;}
+	.box span{-webkit-transform-style:preserve-3d; -webkit-transform:perspective(800px) rotateY(0deg); position:absolute;}
+	.box span em{position:absolute; left:0; top:0; width:100%; height:100%;}
+	.box span .front{ background:url(img/1.jpg);-webkit-transform:translateZ(1px);}
+	.box span .back{ background:url(img/2.jpg);-webkit-transform:translateZ(-1px) scale(-1,1);}
+
+</style>
+<script>
+	document.addEventListener('DOMContentLoaded',function(){
+		var oBtn=document.querySelector('input');
+		var oBox=document.querySelector('.box');
+		var R=7;
+		var C=4;
+		
+		for(var i=0;i<R;i++){
+			for(var j=0;j<C;j++){
+				var oS=document.createElement('span');
+				oS.style.width=oBox.offsetWidth/R+'px';
+				oS.style.height=oBox.offsetHeight/C+'px';
+				oS.innerHTML='<em class="front"></em><em class="back"></em>';
+				oBox.appendChild(oS);
+				oS.style.left=i*oS.offsetWidth+'px';
+				oS.style.top=j*oS.offsetHeight+'px';
+				var oF=oS.children[0];
+				var oB=oS.children[1];
+				oF.style.backgroundPosition=oB.style.backgroundPosition=-i*oS.offsetWidth+'px '+-j*oS.offsetHeight+'px';
+				oS.c=j;
+				oS.r=i;
+			}
+		}
+		var aS=document.getElementsByTagName('span');
+		var iNow=0;
+		var bOk=false;
+		oBtn.onclick=function(){
+			if(bOk) return;
+			bOk=true;
+			iNow++;
+			for(var i=0;i<aS.length;i++){
+				
+				aS[i].style.WebkitTransition='1s all ease '+(aS[i].c+aS[i].r)*100+'ms';
+				aS[i].style.WebkitTransform='perspective(800px) rotateY(180deg)';
+			}
+			aS[aS.length-1].addEventListener('transitionend',function(){
+				for(var i=0;i<aS.length;i++){
+					aS[i].style.WebkitTransition='null';
+					aS[i].style.WebkitTransform='perspective(800px) rotateY(0deg)';
+					var oF=aS[i].children[0];
+					var oB=aS[i].children[1];
+					
+					oF.style.backgroundImage='url(img/'+(iNow%3+1)+'.jpg)';
+					oB.style.backgroundImage='url(img/'+((iNow+1)%3+1)+'.jpg)';
+					//alert(oB.style.backgroundImage);
+				}
+				bOk=false;
+			},false);
+		};
+		
+		
+	},false);
+</script>
+</head>
+
+<body>
+<input type="button" value="翻转" >
+<div class="box"></div>
+</body>
+</html>
